@@ -1,0 +1,547 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>TypeScript--表达式与循环(04) | tangqk</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Tang Quan Kun">
+    
+
+    
+    <meta name="description" content="主要是箭头表达式和for of循环 第一节 箭头表达式箭头表达式用来声明匿名函数，消除传统匿名函数的this指针问题，(这儿有点儿争议)，下面我们来看一个简单demo从上面的ts和js对比结果可以看出，ts定义一个匿名函数，然后返回num1和num2相加，这里没有用到return，如果要是多行的要写大括号和return的匿名函数有几种方法类型，第一种是没有任何参数的1234567var sum =">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TypeScript--表达式与循环(04)">
+<meta property="og:url" content="http://yoursite.com/2017/07/24/typescript04/index.html">
+<meta property="og:site_name" content="tangqk">
+<meta property="og:description" content="主要是箭头表达式和for of循环 第一节 箭头表达式箭头表达式用来声明匿名函数，消除传统匿名函数的this指针问题，(这儿有点儿争议)，下面我们来看一个简单demo从上面的ts和js对比结果可以看出，ts定义一个匿名函数，然后返回num1和num2相加，这里没有用到return，如果要是多行的要写大括号和return的匿名函数有几种方法类型，第一种是没有任何参数的1234567var sum =">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/img/04/01.png">
+<meta property="og:image" content="http://yoursite.com/img/04/02.png">
+<meta property="og:image" content="http://yoursite.com/img/04/03.png">
+<meta property="og:image" content="http://yoursite.com/img/04/04.png">
+<meta property="og:image" content="http://yoursite.com/img/04/05.png">
+<meta property="og:updated_time" content="2017-07-24T02:16:48.104Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TypeScript--表达式与循环(04)">
+<meta name="twitter:description" content="主要是箭头表达式和for of循环 第一节 箭头表达式箭头表达式用来声明匿名函数，消除传统匿名函数的this指针问题，(这儿有点儿争议)，下面我们来看一个简单demo从上面的ts和js对比结果可以看出，ts定义一个匿名函数，然后返回num1和num2相加，这里没有用到return，如果要是多行的要写大括号和return的匿名函数有几种方法类型，第一种是没有任何参数的1234567var sum =">
+<meta name="twitter:image" content="http://yoursite.com/img/04/01.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="tangqk" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/author.jpg" alt="tangqk" title="tangqk"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="tangqk">tangqk</a></h1>
+				<h2 class="blog-motto">走自己的路，让别人去说</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">目录</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/07/24/typescript04/" title="TypeScript--表达式与循环(04)" itemprop="url">TypeScript--表达式与循环(04)</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Tang Quan Kun" target="_blank" itemprop="author">Tang Quan Kun</a>
+		
+  <p class="article-time">
+    <time datetime="2017-07-24T02:16:48.103Z" itemprop="datePublished"> 发表于 2017-07-24</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一节-箭头表达式"><span class="toc-number">1.</span> <span class="toc-text">第一节 箭头表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#箭头表达式"><span class="toc-number">1.1.</span> <span class="toc-text">箭头表达式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第一节-新的循环"><span class="toc-number">2.</span> <span class="toc-text">第一节 新的循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#新的循环"><span class="toc-number">2.1.</span> <span class="toc-text">新的循环</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<p>主要是箭头表达式和for of循环</p>
+<h2 id="第一节-箭头表达式"><a href="#第一节-箭头表达式" class="headerlink" title="第一节 箭头表达式"></a>第一节 箭头表达式</h2><h3 id="箭头表达式"><a href="#箭头表达式" class="headerlink" title="箭头表达式"></a>箭头表达式</h3><p>用来声明匿名函数，消除传统匿名函数的this指针问题，(这儿有点儿争议)，下面我们来看一个简单demo<br><img src="/img/04/01.png" alt=""><br>从上面的ts和js对比结果可以看出，ts定义一个匿名函数，然后返回num1和num2相加，这里没有用到return，如果要是多行的要写大括号和return的<br><img src="/img/04/02.png" alt=""><br>匿名函数有几种方法类型，第一种是没有任何参数的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> sum = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.info(<span class="string">"tang quan kun "</span>)</div><div class="line">&#125;</div><div class="line">转化为js</div><div class="line"><span class="keyword">var</span> sum = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.info(<span class="string">"tang quan kun "</span>);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>第二种只有一个参数<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> sum = <span class="function"><span class="params">num</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.info(num)</div><div class="line">&#125;</div><div class="line">转化为的js</div><div class="line"><span class="keyword">var</span> sum = <span class="function"><span class="keyword">function</span> (<span class="params">num</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.info(num);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>下面来看一个简单的例子<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</div><div class="line"><span class="built_in">console</span>.info(arr.filter(<span class="function"><span class="params">val</span>=&gt;</span>val%<span class="number">2</span>==<span class="number">0</span>)) <span class="comment">//[2,4,6]</span></div><div class="line"><span class="comment">//转化为的js</span></div><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];</div><div class="line"><span class="built_in">console</span>.info(arr.filter(<span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123; <span class="keyword">return</span> val % <span class="number">2</span> == <span class="number">0</span>; &#125;));</div></pre></td></tr></table></figure></p>
+<p>这个filter参数就是一个匿名函数，接受一个参数,对接收的val进行判断，如果是偶数就返回true，并把这个值留在数组里面，奇数都被过滤掉了这样不仅是缩短了代码量，并且最大的一个好处就是解决了this指针的问题，在传统的js代码里，this老爱容易搞晕<br>下面来举一个传统的js关键字出现的一些问题<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params">name: string</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name</div><div class="line">    setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">       <span class="built_in">console</span>.info(<span class="string">"this name is:"</span>+<span class="keyword">this</span>.name) </div><div class="line">    &#125;,<span class="number">1000</span>)</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> start = <span class="keyword">new</span> getName(<span class="string">"tang quan kun"</span>)</div></pre></td></tr></table></figure></p>
+<p><img src="/img/04/03.png" alt=""><br>可以从结果中看到，打印出来出来的this.name什么都没有，但是按照我们逻辑打印出来的this.name应该是tang quan kun，我们实例一个getName对象，并传一个 tang quan kun ，所以this.name应该是有值，下面我们换一种方法来<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params">name: string</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name</div><div class="line">    setInterval(<span class="function"><span class="params">()</span>=&gt;</span> &#123;</div><div class="line">       <span class="built_in">console</span>.info(<span class="string">"this name is:"</span>+<span class="keyword">this</span>.name) </div><div class="line">    &#125;,<span class="number">1000</span>)</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> start = <span class="keyword">new</span> getName(<span class="string">"tang quan kun"</span>)</div></pre></td></tr></table></figure></p>
+<p><img src="/img/04/04.png" alt=""><br>现在打印出来的就有值了，仔细对比一下上面两段代码，我们只是把setInterval里面的匿名函数进行了一个小的修改，把传统的匿名函数改成了箭头的函数，这样做的结果就符合我想要的结果</p>
+<h2 id="第一节-新的循环"><a href="#第一节-新的循环" class="headerlink" title="第一节 新的循环"></a>第一节 新的循环</h2><h3 id="新的循环"><a href="#新的循环" class="headerlink" title="新的循环"></a>新的循环</h3><p>在做新的循环（ for of）的时候，我们先来看看传统的js的用到的循环，forEach 、for in 进行比较<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div><div class="line">arr.name = <span class="string">"tang quan kun"</span>  <span class="comment">//这种写法在ts会报错，但是编译成js是可以运行的</span></div><div class="line">arr.forEach(<span class="function"><span class="params">val</span>=&gt;</span><span class="built_in">console</span>.info(val)) <span class="comment">//[1,2,3,4]</span></div></pre></td></tr></table></figure></p>
+<p>从上面打印出来的结果可以知道，对数组做的name是没有打印出来的，那是因为forEach会循环数组里面的元素，但是会把里面属性跟忽略掉，所以打印出来就是[1,2,3,4],还有就是forEach函数运行起来后，是不能够跳出来，不像其他函数一样满足某个条件可以break<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div><div class="line">arr.name = <span class="string">"tang quan kun"</span></div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> n <span class="keyword">in</span> arr) &#123;</div><div class="line">    <span class="built_in">console</span>.info(n) [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,name]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>为什么打印出来是[0,1,2,3,name],因为for in便利的数组里面的属性的名字，而不是值，因为不管是数组或者对象都是以一个键值对形式存在，for in循环是循环的键值对（key）这儿就不多介绍，如果要用for in获取值可以通过以下方法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div><div class="line">arr.name = <span class="string">"tang quan kun"</span></div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> n <span class="keyword">in</span> arr) &#123;</div><div class="line">    <span class="built_in">console</span>.info(arr[n]) <span class="comment">//[1,2,3,4,tang quan kun]</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>下面我们来一个新的循环for of ，它跟forEach有点儿一样，唯一不同的就是可以打断，可以break<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div><div class="line">arr.name = <span class="string">"tang quan kun"</span></div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> n <span class="keyword">of</span> arr) &#123;</div><div class="line">    <span class="built_in">console</span>.info(n) <span class="comment">//[1,2,3,4]</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这打印出来跟forEach一样的结果，下面来看看break<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div><div class="line">arr.name = <span class="string">"tang quan kun"</span></div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> n <span class="keyword">of</span> arr) &#123;</div><div class="line">    <span class="keyword">if</span> (n &gt;<span class="number">2</span>) &#123;</div><div class="line">        <span class="keyword">break</span></div><div class="line">    &#125;</div><div class="line">    <span class="built_in">console</span>.info(n) <span class="comment">//[1,2]</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面当大于2的时候就跳出了，for of也可以对字符串进行循环<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">"tang quan kun"</span></div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> n <span class="keyword">of</span> str)&#123;</div><div class="line">    <span class="built_in">console</span>.info(n)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>打印出的结果<br><img src="/img/04/05.png" alt=""></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/TypeScript/">-TypeScript</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2017/07/24/typescript04/" data-title="TypeScript--表达式与循环(04) | tangqk" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+
+         <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/07/24/typescript03/" title="TypeScript--函数新特性(03)">
+  <strong>上一篇：</strong><br/>
+  <span>
+  TypeScript--函数新特性(03)</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/07/24/typescript02/"  title="TypeScript--参数新特性(02)">
+ <strong>下一篇：</strong><br/> 
+ <span>TypeScript--参数新特性(02)
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2017/07/24/typescript04/" data-title="TypeScript--表达式与循环(04)" data-url="http://yoursite.com/2017/07/24/typescript04/"></div>
+</section>
+
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一节-箭头表达式"><span class="toc-number">1.</span> <span class="toc-text">第一节 箭头表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#箭头表达式"><span class="toc-number">1.1.</span> <span class="toc-text">箭头表达式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第一节-新的循环"><span class="toc-number">2.</span> <span class="toc-text">第一节 新的循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#新的循环"><span class="toc-number">2.1.</span> <span class="toc-text">新的循环</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/JavaScript/" title="-JavaScript">-JavaScript<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/TypeScript/" title="-TypeScript">-TypeScript<sup>11</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/angular1-x-x/" title="-angular1.x.x">-angular1.x.x<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/gitlab/" title="-gitlab">-gitlab<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://baizn.github.io/" target="_blank" title="前端大牛">baizn</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.xqiao.cc" target="_blank" title="d3大师">xiaoqiao</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=null&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 成功永远属于马上行动的人 <br/>
+			下定决心一定要，才是成功的关键.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2176287895" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="Tang Quan Kun">Tang Quan Kun</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"tangqk"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'tangqk';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

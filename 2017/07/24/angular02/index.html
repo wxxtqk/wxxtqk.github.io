@@ -1,0 +1,545 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>angualar--directive的用法 | tangqk</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Tang Quan Kun">
+    
+
+    
+    <meta name="description" content="directive的基本用法首先我们来看一下简单的例子12345678910111213141516171819202122232425262728&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html lang=&quot;en&quot; ng-app=&quot;app&quot;&amp;gt;&amp;lt;head&amp;gt;	&amp;lt;meta charset=&quot;UTF-8&quot;&amp;gt;	&amp;lt;title&amp;gt;Document&amp;lt;/ti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angualar--directive的用法">
+<meta property="og:url" content="http://yoursite.com/2017/07/24/angular02/index.html">
+<meta property="og:site_name" content="tangqk">
+<meta property="og:description" content="directive的基本用法首先我们来看一下简单的例子12345678910111213141516171819202122232425262728&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html lang=&quot;en&quot; ng-app=&quot;app&quot;&amp;gt;&amp;lt;head&amp;gt;	&amp;lt;meta charset=&quot;UTF-8&quot;&amp;gt;	&amp;lt;title&amp;gt;Document&amp;lt;/ti">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/img/angular/02/01.png">
+<meta property="og:image" content="http://yoursite.com/img/angular/02/02.png">
+<meta property="og:image" content="http://yoursite.com/img/angular/02/03.png">
+<meta property="og:image" content="http://yoursite.com/img/angular/02/04.png">
+<meta property="og:image" content="http://yoursite.com/img/angular/02/05.png">
+<meta property="og:image" content="http://yoursite.com/img/angular/02/06.png">
+<meta property="og:image" content="http://yoursite.com/img/angular/02/07.png">
+<meta property="og:image" content="http://yoursite.com/img/angular/02/08.png">
+<meta property="og:updated_time" content="2017-07-24T02:16:48.110Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angualar--directive的用法">
+<meta name="twitter:description" content="directive的基本用法首先我们来看一下简单的例子12345678910111213141516171819202122232425262728&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html lang=&quot;en&quot; ng-app=&quot;app&quot;&amp;gt;&amp;lt;head&amp;gt;	&amp;lt;meta charset=&quot;UTF-8&quot;&amp;gt;	&amp;lt;title&amp;gt;Document&amp;lt;/ti">
+<meta name="twitter:image" content="http://yoursite.com/img/angular/02/01.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="tangqk" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/author.jpg" alt="tangqk" title="tangqk"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="tangqk">tangqk</a></h1>
+				<h2 class="blog-motto">走自己的路，让别人去说</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">目录</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/07/24/angular02/" title="angualar--directive的用法" itemprop="url">angualar--directive的用法</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Tang Quan Kun" target="_blank" itemprop="author">Tang Quan Kun</a>
+		
+  <p class="article-time">
+    <time datetime="2017-07-24T02:16:48.110Z" itemprop="datePublished"> 发表于 2017-07-24</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#directive的基本用法"><span class="toc-number">1.</span> <span class="toc-text">directive的基本用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#指令与控制器之间的交互"><span class="toc-number">2.</span> <span class="toc-text">指令与控制器之间的交互</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="directive的基本用法"><a href="#directive的基本用法" class="headerlink" title="directive的基本用法"></a>directive的基本用法</h2><p>首先我们来看一下简单的例子<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span> <span class="attr">ng-app</span>=<span class="string">"app"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"angular.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">angular</span>&gt;</span><span class="tag">&lt;/<span class="name">angular</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">angular.module(<span class="string">'app'</span>, []).directive(<span class="string">'angular'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> &#123;</div><div class="line">		 <span class="attr">restrict</span>: <span class="string">'E'</span>, <span class="comment">// E = Element, A = Attribute, C = Class, M = Comment</span></div><div class="line">		 template: <span class="string">'&lt;div&gt;hello,angular&lt;/div&gt;'</span>,</div><div class="line">		<span class="comment">// templateUrl: '', 这里是html的模板的路径，如果需要的文本比较长的话，可以把模板单独提出来放在一个文件中</span></div><div class="line">		 replace: <span class="literal">true</span>,</div><div class="line">		<span class="comment">// transclude: true,</span></div><div class="line">		<span class="comment">// compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn)&#123; return function linking(scope, elm, attrs)&#123;&#125;&#125;)),</span></div><div class="line">		link: <span class="function"><span class="keyword">function</span>(<span class="params">$scope, iElm, iAttrs, controller</span>) </span>&#123;</div><div class="line">			</div><div class="line">		&#125;</div><div class="line">	&#125;;</div><div class="line">&#125;);</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>在页面上的输出结果为<br><img src="/img/angular/02/01.png" alt=""><br>在directive中，我看来详细的看一下里面配置<br>1、restrict中总共有四个，分别是E表示Element（元素）、A表示Attribute(属性)、C表示Class(表示html类)、M表示Comment(注释),下面我把代码做一下相应的调整<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span> <span class="attr">ng-app</span>=<span class="string">"app"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"angular.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">angular</span>&gt;</span><span class="tag">&lt;/<span class="name">angular</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"angular"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">angular</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!--记住下面的注释要打空格--&gt;</span></div><div class="line">		<span class="comment">&lt;!-- directive:angular --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">angular.module(<span class="string">'app'</span>, []).directive(<span class="string">'angular'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> &#123;</div><div class="line">		 <span class="attr">restrict</span>: <span class="string">'EACM'</span>, <span class="comment">// E = Element, A = Attribute, C = Class, M = Comment</span></div><div class="line">		 template: <span class="string">'&lt;div&gt;hello,angular&lt;/div&gt;'</span>,</div><div class="line">		<span class="comment">// templateUrl: '', 这里是html的模板的路径，如果需要的文本比较长的话，可以把模板单独提出来放在一个文件中</span></div><div class="line">		 replace: <span class="literal">true</span>,</div><div class="line">		<span class="comment">// transclude: true,</span></div><div class="line">		<span class="comment">// compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn)&#123; return function linking(scope, elm, attrs)&#123;&#125;&#125;)),</span></div><div class="line">		link: <span class="function"><span class="keyword">function</span>(<span class="params">$scope, iElm, iAttrs, controller</span>) </span>&#123;</div><div class="line">			</div><div class="line">		&#125;</div><div class="line">	&#125;;</div><div class="line">&#125;);</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p><img src="/img/angular/02/02.png" alt=""><br>angular中，在restrict中最常用的是E和A这两个属性，其中C和M很少用，特别是C会产生混乱。<br>2、replace属性为true时，会替换directive指向的元素;为false时将directive的内容作为子元素插入到directive指向的元素。默认为false，<br>下面看看replace为false时，最后生成的文档结构<br><img src="/img/angular/02/03.png" alt=""><br>在replace为false时，注释是没有被生成渲染出来的，<br>当replace为true时，最后生成文档的样式<br><img src="/img/angular/02/04.png" alt=""><br>3、transclude表示变换<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">angular</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span>如果我们想把这段文字和div也保存并显示出来的话，我们用replace是无法实现的，这就要要用到了transclude了<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">angular</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>下面我们来看代码<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span> <span class="attr">ng-app</span>=<span class="string">"app"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"angular.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">angular</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">div</span>&gt;</span>如果我们想把这段文字和div也保存并显示出来的话，我们用replace是无法实现的，这就要要用到了transclude了<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">angular</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">angular.module(<span class="string">'app'</span>, []).directive(<span class="string">'angular'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> &#123;</div><div class="line">		 <span class="attr">restrict</span>: <span class="string">'E'</span>, </div><div class="line">		 <span class="attr">template</span>: <span class="string">'&lt;div&gt;hello,angular&lt;div ng-transclude&gt;&lt;/div&gt;&lt;/div&gt;'</span>,</div><div class="line">		 <span class="attr">transclude</span>: <span class="literal">true</span>,</div><div class="line">		<span class="attr">link</span>: <span class="function"><span class="keyword">function</span>(<span class="params">$scope, iElm, iAttrs, controller</span>) </span>&#123;</div><div class="line">			</div><div class="line">		&#125;</div><div class="line">	&#125;;</div><div class="line">&#125;);</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>显示出来的结果<br><img src="/img/angular/02/05.png" alt=""><br>我们从上面的代码中可以看到，在template中有个ng-transclude，这就是把angular元素里面的值变换到这儿，然后让在页面上显示出来，从而不会被替换掉<br>4、compile与link函数<br><img src="/img/angular/02/06.png" alt=""><br>从上面这张图片中可以清楚的看出关系，一般不会自己自定义compile函数，因为那样会覆盖掉本身的compile函数，一般是写link函数</p>
+<h2 id="指令与控制器之间的交互"><a href="#指令与控制器之间的交互" class="headerlink" title="指令与控制器之间的交互"></a>指令与控制器之间的交互</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span> <span class="attr">ng-app</span>=<span class="string">"app"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"angular.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-controller</span>=<span class="string">"Ctrl"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">angular</span>&gt;</span>测试link函数<span class="tag">&lt;/<span class="name">angular</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">var</span> app = angular.module(<span class="string">'app'</span>, [])</div><div class="line">app.controller(<span class="string">'Ctrl'</span>, [<span class="string">'$scope'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>)</span>&#123;</div><div class="line">	$scope.text = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.info(<span class="string">"测试成功"</span>)</div><div class="line">	&#125;</div><div class="line">&#125;])</div><div class="line">app.directive(<span class="string">'angular'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> &#123;</div><div class="line">		 <span class="attr">restrict</span>: <span class="string">'E'</span>, </div><div class="line">		 <span class="attr">link</span>:<span class="function"><span class="keyword">function</span>(<span class="params">scope,element,attr</span>)</span>&#123;</div><div class="line">		 	element.bind(<span class="string">"mouseenter"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		 		<span class="comment">//scope.text() </span></div><div class="line">		 		scope.$apply(<span class="string">"text()"</span>)</div><div class="line">		 	&#125;)</div><div class="line">		 &#125;</div><div class="line">	&#125;;</div><div class="line">&#125;);</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>当鼠标移上去的时候，在控制台上打印出<br><img src="/img/angular/02/07.png" alt=""><br>操作DOM元素最好在link函数上操作<br>如果有两个angular元素呢<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-controller</span>=<span class="string">"Ctrl"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">angular</span>&gt;</span>测试link函数<span class="tag">&lt;/<span class="name">angular</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-controller</span>=<span class="string">"Ctrl2"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">angular</span>&gt;</span>测试link2函数<span class="tag">&lt;/<span class="name">angular</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>这样的话我们用刚开始上面的方法就不行了，就要用到指令了，下面我们来看一下代码<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span> <span class="attr">ng-app</span>=<span class="string">"app"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"angular.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-controller</span>=<span class="string">"Ctrl"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">angular</span> <span class="attr">textTwo</span>=<span class="string">"text()"</span>&gt;</span>测试link函数<span class="tag">&lt;/<span class="name">angular</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-controller</span>=<span class="string">"Ctrl2"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">angular</span> <span class="attr">textTwo</span>=<span class="string">"text2()"</span>&gt;</span>测试link2函数<span class="tag">&lt;/<span class="name">angular</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">var</span> app = angular.module(<span class="string">'app'</span>, [])</div><div class="line">app.controller(<span class="string">'Ctrl'</span>, [<span class="string">'$scope'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>)</span>&#123;</div><div class="line">	$scope.text = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.info(<span class="string">"测试成功"</span>)</div><div class="line">	&#125;</div><div class="line">&#125;])</div><div class="line">app.controller(<span class="string">'Ctrl2'</span>, [<span class="string">'$scope'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>)</span>&#123;</div><div class="line">	$scope.text2= <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.info(<span class="string">"测试2成功"</span>)</div><div class="line">	&#125;</div><div class="line">&#125;])</div><div class="line">app.directive(<span class="string">'angular'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> &#123;</div><div class="line">		 <span class="attr">restrict</span>: <span class="string">'E'</span>, </div><div class="line">		 <span class="attr">link</span>:<span class="function"><span class="keyword">function</span>(<span class="params">scope,element,attrs</span>)</span>&#123;</div><div class="line">		 	element.bind(<span class="string">"mouseenter"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		 		<span class="comment">//scope.text() </span></div><div class="line">		 		<span class="comment">//scope.$apply("text()")</span></div><div class="line">		 		scope.$apply(attrs.texttwo)<span class="comment">//注意一下，如果属性是用驼峰法写的，调用的时候要写成的小写，列如textTwo ，在调用的时候要写成texttwo</span></div><div class="line">		 	&#125;)</div><div class="line">		 &#125;</div><div class="line">	&#125;;</div><div class="line">&#125;);</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div><div class="line">输出的结果</div></pre></td></tr></table></figure></p>
+<p><img src="/img/angular/02/08.png" alt="">我们通过attrs去获取里面方法<br>指令之间的交互<a href="http://www.imooc.com/video/3083" target="_blank" rel="external">见慕课网大漠穷秋</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/angular1-x-x/">-angular1.x.x</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2017/07/24/angular02/" data-title="angualar--directive的用法 | tangqk" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+
+         <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/07/24/angular04/" title="angualar--service与Provider">
+  <strong>上一篇：</strong><br/>
+  <span>
+  angualar--service与Provider</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/07/24/angular01/"  title="angualar--基本应用">
+ <strong>下一篇：</strong><br/> 
+ <span>angualar--基本应用
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2017/07/24/angular02/" data-title="angualar--directive的用法" data-url="http://yoursite.com/2017/07/24/angular02/"></div>
+</section>
+
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#directive的基本用法"><span class="toc-number">1.</span> <span class="toc-text">directive的基本用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#指令与控制器之间的交互"><span class="toc-number">2.</span> <span class="toc-text">指令与控制器之间的交互</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/JavaScript/" title="-JavaScript">-JavaScript<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/TypeScript/" title="-TypeScript">-TypeScript<sup>11</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/angular1-x-x/" title="-angular1.x.x">-angular1.x.x<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/gitlab/" title="-gitlab">-gitlab<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://baizn.github.io/" target="_blank" title="前端大牛">baizn</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.xqiao.cc" target="_blank" title="d3大师">xiaoqiao</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=null&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 成功永远属于马上行动的人 <br/>
+			下定决心一定要，才是成功的关键.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2176287895" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="Tang Quan Kun">Tang Quan Kun</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"tangqk"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'tangqk';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
